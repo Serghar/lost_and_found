@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/ground_riverCornerSmall.obj-995dbc9b5bc1eff1d0bb0b560cc9753e.mesh"
+
+[deps]
+
+files=[ "res://.import/ground_riverCornerSmall.obj-995dbc9b5bc1eff1d0bb0b560cc9753e.mesh" ]
+
+source_file="res://assests/nature/ground_riverCornerSmall.obj"
+dest_files=[ "res://.import/ground_riverCornerSmall.obj-995dbc9b5bc1eff1d0bb0b560cc9753e.mesh", "res://.import/ground_riverCornerSmall.obj-995dbc9b5bc1eff1d0bb0b560cc9753e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

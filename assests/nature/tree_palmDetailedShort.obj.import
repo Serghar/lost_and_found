@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/tree_palmDetailedShort.obj-4bf6022caa8df675b5b04644cb698aba.mesh"
+
+[deps]
+
+files=[ "res://.import/tree_palmDetailedShort.obj-4bf6022caa8df675b5b04644cb698aba.mesh" ]
+
+source_file="res://assests/nature/tree_palmDetailedShort.obj"
+dest_files=[ "res://.import/tree_palmDetailedShort.obj-4bf6022caa8df675b5b04644cb698aba.mesh", "res://.import/tree_palmDetailedShort.obj-4bf6022caa8df675b5b04644cb698aba.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

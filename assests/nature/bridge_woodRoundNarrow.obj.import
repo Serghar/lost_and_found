@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/bridge_woodRoundNarrow.obj-c360a2edef61113473bd54fb41713cd9.mesh"
+
+[deps]
+
+files=[ "res://.import/bridge_woodRoundNarrow.obj-c360a2edef61113473bd54fb41713cd9.mesh" ]
+
+source_file="res://assests/nature/bridge_woodRoundNarrow.obj"
+dest_files=[ "res://.import/bridge_woodRoundNarrow.obj-c360a2edef61113473bd54fb41713cd9.mesh", "res://.import/bridge_woodRoundNarrow.obj-c360a2edef61113473bd54fb41713cd9.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

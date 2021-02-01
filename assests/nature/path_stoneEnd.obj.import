@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/path_stoneEnd.obj-963e1861d322b2f21c3a0d5bcd8e6920.mesh"
+
+[deps]
+
+files=[ "res://.import/path_stoneEnd.obj-963e1861d322b2f21c3a0d5bcd8e6920.mesh" ]
+
+source_file="res://assests/nature/path_stoneEnd.obj"
+dest_files=[ "res://.import/path_stoneEnd.obj-963e1861d322b2f21c3a0d5bcd8e6920.mesh", "res://.import/path_stoneEnd.obj-963e1861d322b2f21c3a0d5bcd8e6920.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

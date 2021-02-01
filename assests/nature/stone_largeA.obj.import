@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/stone_largeA.obj-97df73a24680003a9cf5a77c3a30391f.mesh"
+
+[deps]
+
+files=[ "res://.import/stone_largeA.obj-97df73a24680003a9cf5a77c3a30391f.mesh" ]
+
+source_file="res://assests/nature/stone_largeA.obj"
+dest_files=[ "res://.import/stone_largeA.obj-97df73a24680003a9cf5a77c3a30391f.mesh", "res://.import/stone_largeA.obj-97df73a24680003a9cf5a77c3a30391f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

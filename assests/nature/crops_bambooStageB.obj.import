@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/crops_bambooStageB.obj-8162f5cea6e72e15a512ae5b5e49ec33.mesh"
+
+[deps]
+
+files=[ "res://.import/crops_bambooStageB.obj-8162f5cea6e72e15a512ae5b5e49ec33.mesh" ]
+
+source_file="res://assests/nature/crops_bambooStageB.obj"
+dest_files=[ "res://.import/crops_bambooStageB.obj-8162f5cea6e72e15a512ae5b5e49ec33.mesh", "res://.import/crops_bambooStageB.obj-8162f5cea6e72e15a512ae5b5e49ec33.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

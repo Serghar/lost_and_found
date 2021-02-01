@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/tree_fat_fall.obj-8e99cc13faca92f9d5faea08e02e5372.mesh"
+
+[deps]
+
+files=[ "res://.import/tree_fat_fall.obj-8e99cc13faca92f9d5faea08e02e5372.mesh" ]
+
+source_file="res://assests/nature/tree_fat_fall.obj"
+dest_files=[ "res://.import/tree_fat_fall.obj-8e99cc13faca92f9d5faea08e02e5372.mesh", "res://.import/tree_fat_fall.obj-8e99cc13faca92f9d5faea08e02e5372.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

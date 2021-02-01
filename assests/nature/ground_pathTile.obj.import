@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/ground_pathTile.obj-544cff1769131b555e86893a2827bdca.mesh"
+
+[deps]
+
+files=[ "res://.import/ground_pathTile.obj-544cff1769131b555e86893a2827bdca.mesh" ]
+
+source_file="res://assests/nature/ground_pathTile.obj"
+dest_files=[ "res://.import/ground_pathTile.obj-544cff1769131b555e86893a2827bdca.mesh", "res://.import/ground_pathTile.obj-544cff1769131b555e86893a2827bdca.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

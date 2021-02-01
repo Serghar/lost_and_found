@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/campfire_planks.obj-2736ec4422f7fdd5c093b1bf09bdba09.mesh"
+
+[deps]
+
+files=[ "res://.import/campfire_planks.obj-2736ec4422f7fdd5c093b1bf09bdba09.mesh" ]
+
+source_file="res://assests/nature/campfire_planks.obj"
+dest_files=[ "res://.import/campfire_planks.obj-2736ec4422f7fdd5c093b1bf09bdba09.mesh", "res://.import/campfire_planks.obj-2736ec4422f7fdd5c093b1bf09bdba09.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

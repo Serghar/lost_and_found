@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/ground_riverSide.obj-87c4dda2f03153f95185c478fa4e18ca.mesh"
+
+[deps]
+
+files=[ "res://.import/ground_riverSide.obj-87c4dda2f03153f95185c478fa4e18ca.mesh" ]
+
+source_file="res://assests/nature/ground_riverSide.obj"
+dest_files=[ "res://.import/ground_riverSide.obj-87c4dda2f03153f95185c478fa4e18ca.mesh", "res://.import/ground_riverSide.obj-87c4dda2f03153f95185c478fa4e18ca.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/statue_block.obj-4164189c988223c711ae56f1bf3af75b.mesh"
+
+[deps]
+
+files=[ "res://.import/statue_block.obj-4164189c988223c711ae56f1bf3af75b.mesh" ]
+
+source_file="res://assests/nature/statue_block.obj"
+dest_files=[ "res://.import/statue_block.obj-4164189c988223c711ae56f1bf3af75b.mesh", "res://.import/statue_block.obj-4164189c988223c711ae56f1bf3af75b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
