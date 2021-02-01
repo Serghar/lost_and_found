@@ -8,10 +8,13 @@ const DEFAULT_PORT = 10567
 # Max number of players.
 const MAX_PEERS = 3
 
+enum Roles {SURVIVE, RESCUE}
+
 var peer = null
 
 # Name for my player.
-var player_name = "Dill"
+var player_name = "Player"
+var role = Roles.SURVIVE
 
 # Names for remote players in id:name format.
 var players = {}
@@ -23,6 +26,8 @@ signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
+
+var rng = RandomNumberGenerator.new()
 
 func _process(delta):
 	if has_node("/root/World"):
@@ -80,23 +85,36 @@ func unregister_player(id):
 
 
 remote func pre_start_game(spawn_points):
+	# Set role - Currently the host is the only RESCUE role
+	# TODO: make this selectable in lobby or randomized on connection
+	if not get_tree().is_network_server():
+		role = Roles.SURVIVE
+	else:
+		role = Roles.RESCUE
+
 	# Change scene.
 	var world = load("res://scenes/World.tscn").instance()
 	get_tree().get_root().add_child(world)
 
 	get_tree().get_root().get_node("Lobby").hide()
 
-	var player_scene = load("res://scenes/Player.tscn")
+	if role == Roles.SURVIVE:
+		var player_scene = load("res://scenes/Player.tscn")
+		for p_id in spawn_points:
+			# Get a random island from world
+			var islandIds = world.islands.keys()
+			var selectedIslandId = islandIds[rng.randi_range(0, islandIds.size())]
+			var selectedIsland = world.islands[selectedIslandId]
+			selectedIsland.has_player = true
 
-	for p_id in spawn_points:
-		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).transform
-		var player = player_scene.instance()
+			var spawn_pos = selectedIsland.transform.origin
+			var player = player_scene.instance()
 
-		player.set_name(str(p_id)) # Use unique ID as node name.
-		player.transform=spawn_pos
-		player.set_network_master(p_id) #set unique id as master.
+			player.set_name(str(p_id)) # Use unique ID as node name.
+			player.transform.origin=spawn_pos
+			player.set_network_master(p_id) #set unique id as master.
 
-		world.get_node("Players").add_child(player)
+			world.get_node("Players").add_child(player)
 
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start.
