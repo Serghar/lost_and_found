@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Rescuer_WorldCamera.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Rescuer.gd" type="Script" id=2]
+
+[node name="Rescuer" type="Node"]
+script = ExtResource( 2 )
+
+[node name="WorldCamera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 250, 0 )
+far = 1000.0
+script = ExtResource( 1 )
+
+[node name="Tween" type="Tween" parent="WorldCamera"]

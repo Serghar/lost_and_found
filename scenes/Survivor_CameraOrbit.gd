@@ -9,11 +9,7 @@ var maxLookAngle: float = 75.0
 var mouseDelta = Vector2()
 
 # components
-onready var player = get_parent()
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+onready var player = get_parent()	
 
 func _process(delta):
 	# Get rotation to apply to the camera and plater

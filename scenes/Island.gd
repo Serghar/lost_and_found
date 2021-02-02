@@ -27,3 +27,11 @@ func add_tree(location_offset: Vector3):
 
 func set_rng_ref(ref):
 	rng = ref
+
+# TODO: probably update this event to be raycast from camera as this currently doesn't work if clicking env nodes
+func _on_FloorCollider_input_event(camera, event, click_position, click_normal, shape_idx):
+	if event is InputEventMouseButton \
+	and event.button_index == BUTTON_LEFT \
+	and event.pressed:
+		gamestate.end_game(hasPlayer)
+	

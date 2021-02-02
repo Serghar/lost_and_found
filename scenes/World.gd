@@ -8,13 +8,10 @@ var islandSpacing = 40
 # Val: IslandRef
 var islands = {}
 
-onready var worldCamera: Camera = $WorldCamera
-
 var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	generate_islands()
-	set_world_camera()
 	
 func generate_islands():
 	var island_scene = load("res://scenes/Island.tscn")
@@ -35,11 +32,6 @@ func generate_islands():
 		)
 		islands[val] = island
 		get_node("Islands").add_child(island)
-
-func set_world_camera():
-	worldCamera.set_max_boundry_pos(Vector2(worldSize * islandSpacing, worldSize * islandSpacing))
-	worldCamera.transform.origin.x = worldSize * islandSpacing / 2
-	worldCamera.transform.origin.z = worldSize * islandSpacing / 2
 
 # returns idx positions in array/coordinates for island
 func get_idx_position2D(val, size: int) -> Vector2:

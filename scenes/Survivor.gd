@@ -17,7 +17,8 @@ onready var camera: Camera = get_node("CameraOrbit").get_child(0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if is_network_master() and camera != null:
+	if is_network_master():
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		camera.make_current()
 
 func _physics_process(delta):
@@ -59,3 +60,6 @@ func _physics_process(delta):
 		rset("puppet_transform", transform)
 	elif not transform.origin == puppet_transform.origin:
 		transform = puppet_transform
+
+func set_spawn_location(location):
+	transform.origin = location

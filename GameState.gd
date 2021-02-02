@@ -24,6 +24,7 @@ var players_ready = []
 signal player_list_changed()
 signal connection_failed()
 signal connection_succeeded()
+signal server_closed()
 signal game_ended()
 signal game_error(what)
 
@@ -32,8 +33,7 @@ var rng = RandomNumberGenerator.new()
 func _process(delta):
 	if has_node("/root/World"):
 		if Input.is_action_pressed("disconnect"):
-			peer.close_connection()
-			end_game()
+			leave_active_game()
 
 # Callback from SceneTree.
 func _player_connected(id):
@@ -46,7 +46,7 @@ func _player_disconnected(id):
 	if has_node("/root/World"): # Game is in progress.
 		if get_tree().is_network_server():
 			emit_signal("game_error", "Player " + players[id] + " disconnected")
-			end_game()
+			close_server()
 	else: # Game is not in progress.
 		# Unregister this player.
 		unregister_player(id)
@@ -61,7 +61,7 @@ func _connected_ok():
 # Callback from SceneTree, only for clients (not server).
 func _server_disconnected():
 	emit_signal("game_error", "Server disconnected")
-	end_game()
+	close_server()
 
 
 # Callback from SceneTree, only for clients (not server).
@@ -84,37 +84,47 @@ func unregister_player(id):
 	emit_signal("player_list_changed")
 
 
-remote func pre_start_game(spawn_points):
-	# Set role - Currently the host is the only RESCUE role
-	# TODO: make this selectable in lobby or randomized on connection
-	if not get_tree().is_network_server():
-		role = Roles.SURVIVE
-	else:
-		role = Roles.RESCUE
-
+remote func pre_start_game(playerIds):
 	# Change scene.
 	var world = load("res://scenes/World.tscn").instance()
 	get_tree().get_root().add_child(world)
 
 	get_tree().get_root().get_node("Lobby").hide()
+	
+	var survivor_scene = load("res://scenes/Survivor.tscn")
+	var rescuer_scene = load("res://scenes/Rescuer.tscn")
+	
+	# Assign a random player from the list as the rescuer and spawn into the world
+	var rescuerIdx = rng.randi_range(0, playerIds.size() - 1)
+	var rescuerId = playerIds[rescuerIdx]
+	playerIds.remove(rescuerIdx)
+	if get_tree().get_network_unique_id() == rescuerId:
+		role = Roles.RESCUE
+	else:
+		role = Roles.SURVIVE
+	
+	var rescuer = rescuer_scene.instance()
+	rescuer.set_name(str(rescuerId))
+	rescuer.set_world_location(world.worldSize, world.islandSpacing)
+	rescuer.set_network_master(rescuerId)
+	world.get_node("Players").add_child(rescuer)
 
-	if role == Roles.SURVIVE:
-		var player_scene = load("res://scenes/Player.tscn")
-		for p_id in spawn_points:
-			# Get a random island from world
-			var islandIds = world.islands.keys()
-			var selectedIslandId = islandIds[rng.randi_range(0, islandIds.size())]
-			var selectedIsland = world.islands[selectedIslandId]
-			selectedIsland.has_player = true
+	# Spawn the remainder of players as survivors
+	for p_id in playerIds:
+		# Get a random island from world and set it as player spawn
+		var islandIds = world.islands.keys()
+		var selectedIslandId = islandIds[rng.randi_range(0, islandIds.size() - 1)]
+		var selectedIsland = world.islands[selectedIslandId]
+		selectedIsland.hasPlayer = true
+		var spawn_pos = selectedIsland.transform.origin
 
-			var spawn_pos = selectedIsland.transform.origin
-			var player = player_scene.instance()
-
-			player.set_name(str(p_id)) # Use unique ID as node name.
-			player.transform.origin=spawn_pos
-			player.set_network_master(p_id) #set unique id as master.
-
-			world.get_node("Players").add_child(player)
+		var player = survivor_scene.instance()
+		if role == Roles.RESCUE:
+			player.visible = false # Hide players from rescuers
+		player.set_name(str(p_id))
+		player.set_spawn_location(spawn_pos)
+		player.set_network_master(p_id)
+		world.get_node("Players").add_child(player)
 
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start.
@@ -163,30 +173,41 @@ func get_player_name():
 
 func begin_game():
 	assert(get_tree().is_network_server())
-
-	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing.
-	var spawn_points = {}
-	spawn_points[1] = 0 # Server in spawn point 0.
-	var spawn_point_idx = 1
+	
+	# TODO: figure out why server player isn't added to list
+	# Potentially with a dedicated server we will never need to include the server as a character
+	var playerIdsWithServer = players.keys()
+	playerIdsWithServer.append(1)
 	for p in players:
-		spawn_points[p] = spawn_point_idx
-		spawn_point_idx += 1
-	# Call to pre-start game with the spawn points.
-	for p in players:
-		rpc_id(p, "pre_start_game", spawn_points)
+		rpc_id(p, "pre_start_game", playerIdsWithServer)
 
-	pre_start_game(spawn_points)
+	pre_start_game(playerIdsWithServer)
 
+remote func end_game(success):
+	if get_tree().is_network_server():
+		for p in players:
+			rpc_id(p, "end_game", success)
+	var endGameUI = get_tree().get_root().get_node("World").get_node("EndGame")
+	endGameUI.make_visible(success)
 
-func end_game():
+func return_to_lobby():
+	if has_node("/root/World"): # Game is in progress.
+		# End it
+		get_node("/root/World").queue_free()
+	get_tree().get_root().get_node("Lobby").show()
+
+func close_server():
 	if has_node("/root/World"): # Game is in progress.
 		# End it
 		get_node("/root/World").queue_free()
 
-	emit_signal("game_ended")
+	emit_signal("server_closed")
 	players.clear()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+func leave_active_game():
+	peer.close_connection()
+	close_server()
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")

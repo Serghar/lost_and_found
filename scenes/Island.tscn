@@ -19,6 +19,8 @@ material/1 = null
 material/2 = null
 
 [node name="FloorCollider" type="StaticBody" parent="Floor"]
+collision_layer = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="Floor/FloorCollider"]
 shape = SubResource( 1 )
+[connection signal="input_event" from="Floor/FloorCollider" to="." method="_on_FloorCollider_input_event"]

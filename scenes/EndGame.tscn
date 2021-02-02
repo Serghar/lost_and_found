@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/EndGame.gd" type="Script" id=1]
+
+[node name="EndGame" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Connect" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -138.5
+margin_top = -83.5
+margin_right = 161.5
+margin_bottom = 83.5
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="Connect"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 280.0
+margin_bottom = 70.0
+size_flags_horizontal = 0
+size_flags_vertical = 2
+text = "Congratulation you won!!"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Return" type="Button" parent="Connect"]
+margin_left = 100.0
+margin_top = 80.0
+margin_right = 215.0
+margin_bottom = 110.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Return to Lobby"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="Connect"]
+margin_left = 100.0
+margin_top = 120.0
+margin_right = 215.0
+margin_bottom = 150.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Quit Game"
+[connection signal="pressed" from="Connect/Return" to="." method="_on_Return_pressed"]
+[connection signal="pressed" from="Connect/Quit" to="." method="_on_Quit_pressed"]
